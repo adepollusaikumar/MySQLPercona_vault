@@ -1,0 +1,24 @@
+  vault:
+      image: "vault"
+      hostname: "vault"
+      container_name: "vault"
+      restart: "always"
+      privileged: true
+      ports:
+        - "10000:1234"
+      environment:
+        - VAULT_DEV_ROOT_TOKEN_ID=root
+        - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:1234
+  mysql:
+      image: "percona:8.0.25-15"
+      hostname: "percona-mysql"
+      container_name: "percona-mysql"
+      restart: "always"
+      privileged: true
+      ports:
+        - "3306:3306"
+      environment:
+              - MYSQL_ROOT_PASSWORD=root
+      links:
+        - vault
+
